@@ -19,3 +19,12 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+import { defineConfig } from 'vite'
+import react from '@vitejs/react-swc'
+
+// ... other imports if you have them
+
+export default defineConfig({
+  plugins: [react()],
+  base: '/personalcareeerguidance/', // ADD ONLY THIS LINE
+})
