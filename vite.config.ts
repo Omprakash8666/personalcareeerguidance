@@ -1,30 +1,28 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/react-swc';
+import path from 'path';
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
-    },
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+  // 1. Fix the Path for Public Access
+  base: '/personalcareeerguidance/', 
+  
+  // 2. Add Plugins (React and Lovable tools)
+  plugins: [
+    react(),
+    mode === "development" && componentTagger(),
+  ].filter(Boolean),
+
+  // 3. Ensure your files can find each other
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
   },
+
+  // 4. Server settings for development
+  server: {
+    host: "::",
+    port: 8080,
+  },
 }));
-import { defineConfig } from 'vite'
-import react from '@vitejs/react-swc'
-
-// ... other imports if you have them
-
-export default defineConfig({
-  plugins: [react()],
-  base: '/personalcareeerguidance/', // ADD ONLY THIS LINE
-})
